@@ -1,0 +1,139 @@
+---
+title: "Sesión 3"
+subtitle: "Documento de referencia y reportes parametrizados"
+output: 
+    ioslides_presentation:
+        smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Crear nuevo proyecto
+
+Para que mantengas un buen orden en tu aprendizaje, es momento de crear un nuevo proyecto en el que irás anotando todo lo que aprendas en esta sesión. Cabe mencionar que todo lo que anotes deberás publicarlo al final en tu perfil de Rpubs.com
+
+- Crear un nuevo proyecto en nuevo directorio: "03-ejercicios"
+
+## Instala el paquete de ejercicios
+
+Puedes instalar la versión más reciente de `ejerciciosT2` desde el r-universe de *talleresdedatos* con:
+
+```r
+install.packages("ejerciciosT2", repos = 'https://talleresdedatos.r-universe.dev')
+```
+
+O desde el repositorio en Github con:
+
+```r
+remotes::install_github("talleresdedatos/ejerciciosT2")
+```
+
+# Ejercicios
+
+## Ejercicio 1
+
+Usa la plantilla "Documento de referencia" del paquete `ejerciciosT2` para crear un documento R Markdown.
+
+Completa las secciones que requieren completado 
+
+## Ejercicio 2
+
+Continúa usando el documento del ejercicio 1.
+
+Desarrolla funciones que permitan evitar la repetición innecesaria de código similar. Las funciones puedes colocarlas en la sección "Metodología" del reporte.
+
+# Achivo R Markdown como cuerpo de una función
+
+---
+
+Recuerda que las funciones tienen tres componentes: 
+
+1. Su nombre
+2. Sus argumentos
+3. Su cuerpo, donde se especifica la operación a realizar
+
+En su sentido más amplio, una función nos permite tomar algunos *inputs*, realizar una operación usándolos, y obtener un *output*
+
+Si tomamos en cuenta estos componentes, es posible utilizar un archivo R Markdown *como si fuera* una función.
+
+---
+
+El nombre del archivo hace las veces del nombre de la función y los datos especificados en el encabezado YAML hacen las veces de los argumentos.
+
+¿Dónde está el cuerpo de la función?
+
+El resto del documento, incluyendo los bloques de código, texto, imágenes, etc, hacen las veces del cuerpo de la función.
+
+## Crear documento de referencia
+
+Cuando nuestro documento R Markdown genera como resultado un documento de Word, podemos utilizar documentos de referencia para utilizar estilos de texto predefinidos.
+
+La forma más sencilla de generar un documento de referencia adecuado es a partir del primer *output* que obtengas al ejecutar *Knit* en un documento al que le estés dando los toques finales.
+
+Para poder usar el documento de referencia debes indicar en tu encabezado YAML el nombre de tu archivo. Para ello, es necesario incluirlo debajo de las opciones de `word_document`.
+
+```
+output: 
+    word_document:
+        reference_docx: "mi_doc_referencia.docx"
+```
+
+
+## Parámetros
+
+Una manera más directa de especificar qué valores utilizar en el cuerpo de nuestro documento R Markdown es hacer uso de parámetros. Estos pueden ser especificados en el encabezado YAML.
+
+```
+params:
+    pais_1: "Peru"
+    pais_2: "Chile"
+    pais_3: "Mexico"
+    pais_4: "Colombia"
+```
+
+---
+
+Para acceder al valor de los parámetros dentro de nuestro documento debemos usar notación de subsetting de lista.
+
+Por ejemplo, para obtener el valor de `pais_1` dentro de un bloque de código usamos `params$pais_1`. Para obtener su valor fuera de un bloque de código anteponemos `r` a la escritura del código.
+
+## La función `render()`
+
+Si nuestro documento R Markdown utiliza parámetros, podemos hacer uso de la función `render()` del paquete `rmarkdown` para obtener el output de manera más programática. No olvides que el formato y el nombre del *output* deben estar relacionados.
+
+```r
+mis_parametros <- list(
+    pais_1 = "China",
+    pais_2 = "United States",
+    pais_3 = "France",
+    pais_4 = "United Kingdom"
+)
+rmarkdown::render(input = "ejercicio.Rmd", 
+                  output_format = "word_document",
+                  output_file = "ejercicio_output.docx",
+                  params = mis_parametros)
+```
+
+---
+
+Cuando usas la función `render()` sobreescribe los parámetros especificados. 
+
+Es como si los parámetros especificados en tu documento R Markdown sean los argumentos por defecto del documento.
+
+## Ejercicio 3
+
+Crea un documento de referencia para el documento trabajado en los ejercicios 1 y 2
+
+## Ejercicio 4
+
+Crea parámetos para definir los países con los que trabajará tu documento R Markdown usado en los ejercicios anteriores.
+
+## Ejercicio 5
+
+Usa la función `render()` para especificar países distintos a los previamente establecidos. Puedes revisar `gapminder` para conocer la lista completa de países.
+
+
+

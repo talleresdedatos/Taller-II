@@ -1,0 +1,31 @@
+---
+title: "Gráficos base para ejercicios"
+author: "Samuel Calderon"
+date: "11/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+    
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+## Gráfico 1
+
+```{r grafico01}
+gapminder %>% 
+    filter(country %in% c("Peru", "Ecuador")) %>% 
+    ggplot(aes(year, gdpPercap, color = country)) +
+    geom_line()
+```
+
+

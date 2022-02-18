@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/864558/69c732c7bc1e41ca84dfa896a09e64b6
+bundleId: https://api.rpubs.com/api/v1/document/864558/69c732c7bc1e41ca84dfa896a09e64b6
+url: http://rpubs.com/talleresdedatos/864558
+when: 1644963414.30689
+lastSyncTime: 1644963414.30689

@@ -1,0 +1,4 @@
+"0","gapminder %>% "
+"0","    filter(country %in% c(""Peru"", ""Ecuador"")) %>% "
+"0","    ggplot(aes(year, gdpPercap, color = country)) +"
+"0","    geom_line()"
